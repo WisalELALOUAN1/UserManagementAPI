@@ -28,6 +28,10 @@ To run all tests:
 ```bash
 npm test
 ```
+## Project Structure
+- **server.js**: Main application entry point and logic.
+- **server.test.js**: Comprehensive test suite for the API.
+- **package.json**: Project configuration and dependencies.
 
 ## API Endpoints
 | Method | Endpoint | Description |
@@ -39,7 +43,49 @@ npm test
 | **DELETE** | `/users/:id` | Delete a user by ID |
 | **GET** | `/users` | List all users (Query param `?age=X` to filter) |
 
-## Project Structure
-- **server.js**: Main application entry point and logic.
-- **server.test.js**: Comprehensive test suite for the API.
-- **package.json**: Project configuration and dependencies.
+##  Manual Testing with cURL
+
+You can test the API endpoints using the following commands in your terminal:
+
+### 1. Create a User (POST)
+```bash
+curl -X POST http://localhost:3000/users \\
+     -H "Content-Type: application/json" \\
+     -d '{"username": "wisal_dev", "age": 22, "email": "wisal@example.com"}'
+```
+
+### 2. Test Age Validation 
+```bash
+curl -i -X POST http://localhost:3000/users \\
+     -H "Content-Type: application/json" \\
+     -d '{"username": "junior", "age": 16, "email": "junior@example.com"}'
+```
+
+### 3. Get All Users (GET)
+```bash
+curl -X GET http://localhost:3000/users
+```
+
+### 4. Search by Username (GET)
+```bash
+curl -X GET http://localhost:3000/users/username/wisal_dev
+```
+
+### 5. Filter by Age (GET with Query Param)
+```bash
+curl -X GET "http://localhost:3000/users?age=22"
+```
+
+### 6. Update a User (PUT)
+```bash
+curl -X PUT http://localhost:3000/users/1 \\
+     -H "Content-Type: application/json" \\
+     -d '{"username": "wisal_updated", "age": 23, "email": "new_email@example.com"}'
+```
+
+### 7. Delete a User (DELETE)
+``` bash
+curl -i -X DELETE http://localhost:3000/users/1
+```
+
+
